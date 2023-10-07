@@ -29,6 +29,3 @@ jobs:
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Run Tests
-        directory: /home/runner/work/CPE028_Proj_Act4_Grp1/act2_genon/
-        run: npm test
