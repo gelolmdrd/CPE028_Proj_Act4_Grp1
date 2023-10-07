@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import {
   StyleSheet,
   Text,
@@ -14,7 +14,7 @@ export default function App() {
   const [enteredGoalText, setEnteredGoalText] = useState('');
   const [courseGoals, setCourseGoals] = useState([]);
 
-  function goalnputHandler(enteredText) {
+  function goalInputHandler(enteredText) {
     setEnteredGoalText(enteredText);
   }
 
@@ -24,7 +24,7 @@ export default function App() {
     }
 
     setCourseGoals((currentCourseGoals) => [
-      ...courseGoals,
+      ...currentCourseGoals,
       { id: Math.random().toString(), value: enteredGoalText },
     ]);
     setEnteredGoalText('');
@@ -37,7 +37,7 @@ export default function App() {
     >
       <View style={styles.appContainer}>
         <View style={styles.headerContainer}>
-          <Text style={styles.Title}>2023 Goals</Text>
+          <Text style={styles.title}>2023 Goals</Text>
           <Text style={styles.subHeader}>Your Milestone Tracker</Text>
         </View>
 
@@ -45,25 +45,25 @@ export default function App() {
           <TextInput
             placeholder="Your Course Goal"
             style={styles.inputText}
-            onChangeText={goalnputHandler}
+            onChangeText={goalInputHandler}
             value={enteredGoalText}
           />
           <Button title="Add Goal" color="#5D4534" onPress={addGoalHandler} />
         </View>
 
         <FlatList
-          keyExtractor={(item, index) => item.id}
+          keyExtractor={(item) => item.id}
           data={courseGoals}
-          renderItem={(itemData) => (
+          renderItem={({ item }) => (
             <TouchableOpacity
               onPress={() => {
                 setCourseGoals((prevGoals) =>
-                  prevGoals.filter((goal) => goal.id !== itemData.item.id)
+                  prevGoals.filter((goal) => goal.id !== item.id)
                 );
               }}
             >
               <View style={styles.goalItem}>
-                <Text style={styles.goalText}>{itemData.item.value}</Text>
+                <Text style={styles.goalText}>{item.value}</Text>
               </View>
             </TouchableOpacity>
           )}
@@ -73,10 +73,10 @@ export default function App() {
   );
 }
 
-const styles = {
+const styles = StyleSheet.create({
   appContainer: {
     flex: 1,
-    paddingTop:50,
+    paddingTop: 50,
     paddingHorizontal: 16,
   },
   inputContainer: {
@@ -85,12 +85,12 @@ const styles = {
     justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: 24,
-    borderBottomWidth: 1,                   //editt
+    borderBottomWidth: 1,
     borderBottomColor: '#282321',
   },
   inputText: {
     borderWidth: 2,
-    color: 'black',                         //edit
+    color: 'black',
     width: '70%',
     marginRight: 12,
     padding: 13,
@@ -99,12 +99,8 @@ const styles = {
     backgroundColor: '#B3AEA4',
     fontSize: 16,
   },
-  goalContainer: {
-    flex: 5,
-    fontSize: 16,
-  },
   backgroundImage: {
-    flex:1,
+    flex: 1,
     resizeMode: 'stretch',
   },
   headerContainer: {
@@ -119,7 +115,7 @@ const styles = {
     borderWidth: 2,
     borderRadius: 45,
   },
-  Title: {
+  title: {
     fontSize: 30,
     fontWeight: 'bold',
     color: '#302821',
@@ -128,7 +124,7 @@ const styles = {
   subHeader: {
     margin: 5,
     fontSize: 15,
-    color: '#302821'
+    color: '#302821',
   },
   goalItem: {
     padding: 15,
@@ -138,4 +134,8 @@ const styles = {
     borderRadius: 8,
     marginBottom: 10,
   },
-};
+  goalText: {
+    fontSize: 16,
+  },
+});
+
