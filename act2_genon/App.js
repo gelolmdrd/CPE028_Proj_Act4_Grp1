@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 import {
   StyleSheet,
   Text,
@@ -7,27 +7,27 @@ import {
   TextInput,
   ImageBackground,
   TouchableOpacity,
-  FlatList,
-} from 'react-native';
+  FlatList
+} from 'react-native'
 
-export default function App() {
-  const [enteredGoalText, setEnteredGoalText] = useState('');
-  const [courseGoals, setCourseGoals] = useState([]);
+export default function App () {
+  const [enteredGoalText, setEnteredGoalText] = useState('')
+  const [courseGoals, setCourseGoals] = useState([])
 
-  function goalInputHandler(enteredText) {
-    setEnteredGoalText(enteredText);
+  function goalInputHandler (enteredText) {
+    setEnteredGoalText(enteredText)
   }
 
-  function addGoalHandler() {
+  function addGoalHandler () {
     if (enteredGoalText.trim() === '') {
-      return;
+      return
     }
 
     setCourseGoals((currentCourseGoals) => [
       ...currentCourseGoals,
-      { id: Math.random().toString(), value: enteredGoalText },
-    ]);
-    setEnteredGoalText('');
+      { id: Math.random().toString(), value: enteredGoalText }
+    ])
+    setEnteredGoalText('')
   }
 
   return (
@@ -43,12 +43,12 @@ export default function App() {
 
         <View style={styles.inputContainer}>
           <TextInput
-            placeholder="Your Course Goal"
+            placeholder='Your Course Goal'
             style={styles.inputText}
             onChangeText={goalInputHandler}
             value={enteredGoalText}
           />
-          <Button title="Add Goal" color="#5D4534" onPress={addGoalHandler} />
+          <Button title='Add Goal' color='#5D4534' onPress={addGoalHandler} />
         </View>
 
         <FlatList
@@ -59,7 +59,7 @@ export default function App() {
               onPress={() => {
                 setCourseGoals((prevGoals) =>
                   prevGoals.filter((goal) => goal.id !== item.id)
-                );
+                )
               }}
             >
               <View style={styles.goalItem}>
@@ -70,14 +70,14 @@ export default function App() {
         />
       </View>
     </ImageBackground>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
   appContainer: {
     flex: 1,
     paddingTop: 50,
-    paddingHorizontal: 16,
+    paddingHorizontal: 16
   },
   inputContainer: {
     flex: 1,
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 24,
     borderBottomWidth: 1,
-    borderBottomColor: '#282321',
+    borderBottomColor: '#282321'
   },
   inputText: {
     borderWidth: 2,
@@ -97,11 +97,11 @@ const styles = StyleSheet.create({
     borderColor: '#61564A',
     borderRadius: 8,
     backgroundColor: '#B3AEA4',
-    fontSize: 16,
+    fontSize: 16
   },
   backgroundImage: {
     flex: 1,
-    resizeMode: 'stretch',
+    resizeMode: 'stretch'
   },
   headerContainer: {
     backgroundColor: '#B3AEA4',
@@ -113,18 +113,18 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 1,
     borderWidth: 2,
-    borderRadius: 45,
+    borderRadius: 45
   },
   title: {
     fontSize: 30,
     fontWeight: 'bold',
     color: '#302821',
-    paddingBottom: 2,
+    paddingBottom: 2
   },
   subHeader: {
     margin: 5,
     fontSize: 15,
-    color: '#302821',
+    color: '#302821'
   },
   goalItem: {
     padding: 15,
@@ -132,10 +132,9 @@ const styles = StyleSheet.create({
     borderColor: '#333',
     borderWidth: 1,
     borderRadius: 8,
-    marginBottom: 10,
+    marginBottom: 10
   },
   goalText: {
-    fontSize: 16,
-  },
-});
-
+    fontSize: 16
+  }
+})
